@@ -1,15 +1,8 @@
-package nl.novi.backend.techiteasy.models.entities;
+package nl.novi.backend.techiteasy.models.dtos;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import nl.novi.backend.techiteasy.models.entities.Television;
 
-@Entity
-public class Television {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class TelevisionInputDto {
     private String type;
     private String brand;
     private Double price;
@@ -26,35 +19,23 @@ public class Television {
     private Integer originalStock;
     private Integer sold;
 
-    public Television() {
-    }
-
-    public Television(String type, String brand, Double price, Double availableSize, Double refreshRate,
-                      String screenType, String screenQuality, Boolean smartTv, Boolean wifi, Boolean voiceControl,
-                      Boolean hdr, Boolean bluetooth, Boolean ambiLight, Integer originalStock, Integer sold) {
-        this.type = type;
-        this.brand = brand;
-        this.price = price;
-        this.availableSize = availableSize;
-        this.refreshRate = refreshRate;
-        this.screenType = screenType;
-        this.screenQuality = screenQuality;
-        this.smartTv = smartTv;
-        this.wifi = wifi;
-        this.voiceControl = voiceControl;
-        this.hdr = hdr;
-        this.bluetooth = bluetooth;
-        this.ambiLight = ambiLight;
-        this.originalStock = originalStock;
-        this.sold = sold;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id){
-        this.id = id;
+    public static Television toTelevision(TelevisionInputDto televisionInputDto){
+        Television television = new Television(televisionInputDto.getType(),
+                televisionInputDto.getBrand(),
+                televisionInputDto.getPrice(),
+                televisionInputDto.getAvailableSize(),
+                televisionInputDto.getRefreshRate(),
+                televisionInputDto.getScreenType(),
+                televisionInputDto.getScreenQuality(),
+                televisionInputDto.getSmartTv(),
+                televisionInputDto.getWifi(),
+                televisionInputDto.getVoiceControl(),
+                televisionInputDto.getHdr(),
+                televisionInputDto.getBluetooth(),
+                televisionInputDto.getAmbiLight(),
+                televisionInputDto.getOriginalStock(),
+                televisionInputDto.getSold());
+        return television;
     }
 
     public String getType() {
