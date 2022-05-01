@@ -1,14 +1,8 @@
-package nl.novi.backend.techiteasy.models.entities;
+package nl.novi.backend.techiteasy.models.dtos;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import nl.novi.backend.techiteasy.models.entities.Television;
 
-@Entity
-public class Television {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TelevisionOutputDto {
     private Long id;
     private String type;
     private String brand;
@@ -26,12 +20,11 @@ public class Television {
     private Integer originalStock;
     private Integer sold;
 
-    public Television() {
-    }
-
-    public Television(String type, String brand, Double price, Double availableSize, Double refreshRate,
-                      String screenType, String screenQuality, Boolean smartTv, Boolean wifi, Boolean voiceControl,
-                      Boolean hdr, Boolean bluetooth, Boolean ambiLight, Integer originalStock, Integer sold) {
+    public TelevisionOutputDto(Long id, String type, String brand, Double price, Double availableSize,
+                               Double refreshRate, String screenType, String screenQuality, Boolean smartTv,
+                               Boolean wifi, Boolean voiceControl, Boolean hdr, Boolean bluetooth, Boolean ambiLight,
+                               Integer originalStock, Integer sold) {
+        this.id = id;
         this.type = type;
         this.brand = brand;
         this.price = price;
@@ -49,11 +42,31 @@ public class Television {
         this.sold = sold;
     }
 
+    public static TelevisionOutputDto fromTelevision(Television television){
+        TelevisionOutputDto televisionOutputDto = new TelevisionOutputDto(television.getId(),
+                television.getType(),
+                television.getBrand(),
+                television.getPrice(),
+                television.getAvailableSize(),
+                television.getRefreshRate(),
+                television.getScreenType(),
+                television.getScreenQuality(),
+                television.getSmartTv(),
+                television.getWifi(),
+                television.getVoiceControl(),
+                television.getHdr(),
+                television.getBluetooth(),
+                television.getAmbiLight(),
+                television.getOriginalStock(),
+                television.getSold());
+        return televisionOutputDto;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
