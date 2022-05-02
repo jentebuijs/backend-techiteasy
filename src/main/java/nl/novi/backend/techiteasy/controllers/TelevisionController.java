@@ -34,7 +34,7 @@ public class TelevisionController {
     @PostMapping
     public ResponseEntity<TelevisionOutputDto> addTelevision(@RequestBody TelevisionInputDto newTelevision){
         ArrayList<Object> info = televisionService.saveTelevision(newTelevision);
-        URI location = URI.create("televisions/" + ((long) info.get(0)));
+        URI location = URI.create("televisions/" + (info.get(0)));
         return ResponseEntity.created(location).body((TelevisionOutputDto) info.get(1));
     }
 

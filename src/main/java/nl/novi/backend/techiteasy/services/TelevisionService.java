@@ -1,6 +1,6 @@
 package nl.novi.backend.techiteasy.services;
 
-import nl.novi.backend.techiteasy.exceptions.TelevisionNotFoundException;
+import nl.novi.backend.techiteasy.exceptions.RecordNotFoundException;
 import nl.novi.backend.techiteasy.models.dtos.TelevisionInputDto;
 import nl.novi.backend.techiteasy.models.dtos.TelevisionOutputDto;
 import nl.novi.backend.techiteasy.models.entities.Television;
@@ -36,7 +36,7 @@ public class TelevisionService {
     public TelevisionOutputDto getTelevision(Long id){
         Optional<Television> TelevisionFound = televisionRepository.findById(id);
         if(TelevisionFound.isEmpty()){
-            throw new TelevisionNotFoundException("Television not found");
+            throw new RecordNotFoundException("Television not found");
         }
         return fromTelevision(televisionRepository.getById(id));
     }
@@ -49,12 +49,12 @@ public class TelevisionService {
         return info;
     }
 
-    public TelevisionOutputDto updateTelevision(Long id, TelevisionInputDto updatedTelevision){
+    public TelevisionOutputDto updateTelevision(Long id, TelevisionInputDto televisionInputDto){
         Optional<Television> televisionFound = televisionRepository.findById(id);
         if(televisionFound.isEmpty()){
-            throw new TelevisionNotFoundException("Television not found");
+            throw new RecordNotFoundException("Television not found");
         }
-        Television televisionToUpdate = toTelevision(updatedTelevision);
+        Television televisionToUpdate = toTelevision(televisionInputDto);
         televisionToUpdate.setId(id);
         return fromTelevision(televisionRepository.save(televisionToUpdate));
     }
@@ -62,7 +62,7 @@ public class TelevisionService {
     public void deleteTelevision(Long id){
         Optional<Television> televisionFound = televisionRepository.findById(id);
         if(televisionFound.isEmpty()){
-            throw new TelevisionNotFoundException("Television not found");
+            throw new RecordNotFoundException("Television not found");
         }
         televisionRepository.deleteById(id);
     }
