@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,9 +33,9 @@ public class TelevisionController {
 
     @PostMapping
     public ResponseEntity<TelevisionOutputDto> addTelevision(@RequestBody TelevisionInputDto newTelevision){
-        TelevisionOutputDto televisionOutputDto = televisionService.saveTelevision(newTelevision);
-        URI location = URI.create("televisions/" + televisionOutputDto.getId());
-        return ResponseEntity.created(location).body(televisionOutputDto);
+        ArrayList<Object> info = televisionService.saveTelevision(newTelevision);
+        URI location = URI.create("televisions/" + ((long) info.get(0)));
+        return ResponseEntity.created(location).body((TelevisionOutputDto) info.get(1));
     }
 
     @PutMapping("{id}")
