@@ -3,7 +3,10 @@ package nl.novi.backend.techiteasy.services;
 import nl.novi.backend.techiteasy.exceptions.RecordNotFoundException;
 import nl.novi.backend.techiteasy.models.dtos.CIModuleInputDto;
 import nl.novi.backend.techiteasy.models.dtos.CIModuleOutputDto;
+import nl.novi.backend.techiteasy.models.dtos.TelevisionInputDto;
+import nl.novi.backend.techiteasy.models.dtos.TelevisionOutputDto;
 import nl.novi.backend.techiteasy.models.entities.CIModule;
+import nl.novi.backend.techiteasy.models.entities.Television;
 import nl.novi.backend.techiteasy.repositories.CIModuleRepository;
 import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,8 @@ import java.util.Optional;
 
 import static nl.novi.backend.techiteasy.models.dtos.CIModuleInputDto.toCIModule;
 import static nl.novi.backend.techiteasy.models.dtos.CIModuleOutputDto.fromCIModule;
+import static nl.novi.backend.techiteasy.models.dtos.TelevisionInputDto.toTelevision;
+import static nl.novi.backend.techiteasy.models.dtos.TelevisionOutputDto.fromTelevision;
 
 @Service
 public class CIModuleService {
@@ -42,13 +47,10 @@ public class CIModuleService {
         return fromCIModule(ciModuleRepository.getById(id));
     }
 
-    //    public ArrayList<Object> saveTelevision(TelevisionInputDto televisionInputDto){
-//        ArrayList<Object> info = new ArrayList<>();
-//        Television televisionToSave = toTelevision(televisionInputDto);
-//        info.add(televisionToSave.getId());
-//        info.add(fromTelevision(televisionRepository.save(televisionToSave)));
-//        return info;
-//    }
+    public CIModuleOutputDto saveCIModule(CIModuleInputDto ciModuleInputDto){
+        CIModule ciModuleToSave = toCIModule(ciModuleInputDto);
+        return fromCIModule(ciModuleRepository.save(ciModuleToSave));
+    }
 
     public CIModuleOutputDto updateCIModule(Long id, CIModuleInputDto ciModuleInputDto){
     Optional<CIModule> ciModuleFound = ciModuleRepository.findById(id);

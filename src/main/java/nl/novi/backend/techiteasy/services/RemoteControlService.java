@@ -46,13 +46,10 @@ public class RemoteControlService {
         return fromRemoteControl(remotecontrolRepository.getById(id));
     }
 
-//    public ArrayList<Object> saveTelevision(TelevisionInputDto televisionInputDto){
-//        ArrayList<Object> info = new ArrayList<>();
-//        Television televisionToSave = toTelevision(televisionInputDto);
-//        info.add(televisionToSave.getId());
-//        info.add(fromTelevision(televisionRepository.save(televisionToSave)));
-//        return info;
-//    }
+    public RemoteControlOutputDto saveRemoteControl(RemoteControlInputDto remoteControlInputDto){
+        RemoteControl remoteControlToSave = toRemoteControl(remoteControlInputDto);
+        return fromRemoteControl(remotecontrolRepository.save(remoteControlToSave));
+    }
 
     public RemoteControlOutputDto updateRemoteControl(Long id, RemoteControlInputDto remoteControlInputDto){
         Optional<RemoteControl> remoteControlFound = remotecontrolRepository.findById(id);

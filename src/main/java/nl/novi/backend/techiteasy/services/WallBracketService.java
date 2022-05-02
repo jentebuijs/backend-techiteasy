@@ -46,13 +46,10 @@ public class WallBracketService {
         return fromWallBracket(wallBracketRepository.getById(id));
     }
 
-//    public ArrayList<Object> saveTelevision(TelevisionInputDto televisionInputDto){
-//        ArrayList<Object> info = new ArrayList<>();
-//        Television televisionToSave = toTelevision(televisionInputDto);
-//        info.add(televisionToSave.getId());
-//        info.add(fromTelevision(televisionRepository.save(televisionToSave)));
-//        return info;
-//    }
+    public WallBracketOutputDto saveWallBracket(WallBracketInputDto wallBracketInputDto){
+        WallBracket wallBracketToSave = toWallBracket(wallBracketInputDto);
+        return fromWallBracket(wallBracketRepository.save(wallBracketToSave));
+    }
 
     public WallBracketOutputDto updateWallBracket(Long id, WallBracketInputDto wallBracketInputDto){
         Optional<WallBracket> wallBracketFound = wallBracketRepository.findById(id);

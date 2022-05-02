@@ -1,15 +1,13 @@
 package nl.novi.backend.techiteasy.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class RemoteControl {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String compatibleWith;
     private String batteryType;
     private String name;

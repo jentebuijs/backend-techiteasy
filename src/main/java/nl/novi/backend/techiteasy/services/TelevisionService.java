@@ -41,12 +41,9 @@ public class TelevisionService {
         return fromTelevision(televisionRepository.getById(id));
     }
 
-    public ArrayList<Object> saveTelevision(TelevisionInputDto televisionInputDto){
-        ArrayList<Object> info = new ArrayList<>();
+    public TelevisionOutputDto saveTelevision(TelevisionInputDto televisionInputDto){
         Television televisionToSave = toTelevision(televisionInputDto);
-        info.add(televisionToSave.getId());
-        info.add(fromTelevision(televisionRepository.save(televisionToSave)));
-        return info;
+        return fromTelevision(televisionRepository.save(televisionToSave));
     }
 
     public TelevisionOutputDto updateTelevision(Long id, TelevisionInputDto televisionInputDto){

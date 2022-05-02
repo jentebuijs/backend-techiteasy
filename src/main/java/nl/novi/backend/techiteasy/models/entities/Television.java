@@ -1,15 +1,16 @@
 package nl.novi.backend.techiteasy.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Television {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne
+    private RemoteControl remoteControl;
+
     private String type;
     private String brand;
     private Double price;
