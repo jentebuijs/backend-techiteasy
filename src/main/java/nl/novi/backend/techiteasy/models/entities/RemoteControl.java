@@ -8,6 +8,9 @@ public class RemoteControl {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne(mappedBy = "remotecontrol")
+    private Television television;
+
     private String compatibleWith;
     private String batteryType;
     private String name;
@@ -21,6 +24,14 @@ public class RemoteControl {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Television getTelevision() {
+        return television;
+    }
+
+    public void setTelevision(Television television) {
+        this.television = television;
     }
 
     public String getCompatibleWith() {

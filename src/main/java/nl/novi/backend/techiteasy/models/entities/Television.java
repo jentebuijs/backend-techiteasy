@@ -35,6 +35,14 @@ public class Television {
         this.id = id;
     }
 
+    public RemoteControl getRemoteControl() {
+        return remoteControl;
+    }
+
+    public void setRemoteControl(RemoteControl remoteControl) {
+        this.remoteControl = remoteControl;
+    }
+
     public String getType() {
         return type;
     }
