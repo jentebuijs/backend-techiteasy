@@ -3,11 +3,8 @@ package nl.novi.backend.techiteasy.services;
 import nl.novi.backend.techiteasy.exceptions.RecordNotFoundException;
 import nl.novi.backend.techiteasy.models.dtos.RemoteControlInputDto;
 import nl.novi.backend.techiteasy.models.dtos.RemoteControlOutputDto;
-import nl.novi.backend.techiteasy.models.dtos.TelevisionInputDto;
-import nl.novi.backend.techiteasy.models.dtos.TelevisionOutputDto;
 import nl.novi.backend.techiteasy.models.entities.RemoteControl;
-import nl.novi.backend.techiteasy.models.entities.Television;
-import nl.novi.backend.techiteasy.repositories.RemotecontrolRepository;
+import nl.novi.backend.techiteasy.repositories.RemoteControlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +14,13 @@ import java.util.Optional;
 
 import static nl.novi.backend.techiteasy.models.dtos.RemoteControlInputDto.toRemoteControl;
 import static nl.novi.backend.techiteasy.models.dtos.RemoteControlOutputDto.fromRemoteControl;
-import static nl.novi.backend.techiteasy.models.dtos.TelevisionInputDto.toTelevision;
-import static nl.novi.backend.techiteasy.models.dtos.TelevisionOutputDto.fromTelevision;
 
 @Service
 public class RemoteControlService {
-    private final RemotecontrolRepository remotecontrolRepository;
+    private final RemoteControlRepository remotecontrolRepository;
 
     @Autowired
-    public RemoteControlService(RemotecontrolRepository remotecontrolRepository) {
+    public RemoteControlService(RemoteControlRepository remotecontrolRepository) {
         this.remotecontrolRepository = remotecontrolRepository;
     }
 

@@ -48,4 +48,7 @@ public class TelevisionController {
         televisionService.deleteTelevision(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("{id}/remotecontrol")
+
 }

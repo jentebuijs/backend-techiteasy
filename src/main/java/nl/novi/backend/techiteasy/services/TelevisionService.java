@@ -1,10 +1,12 @@
 package nl.novi.backend.techiteasy.services;
 
 import nl.novi.backend.techiteasy.exceptions.RecordNotFoundException;
+import nl.novi.backend.techiteasy.models.dtos.IdInputDto;
 import nl.novi.backend.techiteasy.models.dtos.TelevisionInputDto;
 import nl.novi.backend.techiteasy.models.dtos.TelevisionOutputDto;
+import nl.novi.backend.techiteasy.models.entities.RemoteControl;
 import nl.novi.backend.techiteasy.models.entities.Television;
-import nl.novi.backend.techiteasy.repositories.RemotecontrolRepository;
+import nl.novi.backend.techiteasy.repositories.RemoteControlRepository;
 import nl.novi.backend.techiteasy.repositories.TelevisionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,13 +21,13 @@ import static nl.novi.backend.techiteasy.models.dtos.TelevisionOutputDto.fromTel
 @Service
 public class TelevisionService {
     private final TelevisionRepository televisionRepository;
-    private final RemotecontrolRepository remotecontrolRepository;
+    private final RemoteControlRepository remoteControlRepository;
 
     @Autowired
     public TelevisionService(TelevisionRepository televisionRepository,
-                             RemotecontrolRepository remotecontrolRepository) {
+                             RemoteControlRepository remoteControlRepository) {
         this.televisionRepository = televisionRepository;
-        this.remotecontrolRepository = remotecontrolRepository;
+        this.` = remoteControlRepository;
     }
 
     public List<TelevisionOutputDto> getTelevisions(){
@@ -68,5 +70,18 @@ public class TelevisionService {
         televisionRepository.deleteById(id);
     }
 
-    public void assignRemoteControlToTelevision()
+    public void assignRemoteControlToTelevision(IdInputDto televisionId, IdInputDto remoteControlId){
+        Optional<Television> possibleTelevision = televisionRepository.findById(televisionId.id);
+        if(possibleTelevision.isEmpty()){
+            throw new RecordNotFoundException("Television not found");
+        }
+        Optional<RemoteControl> possibleRemoteControl = remoteControlRepository.findById(remoteControlId.id);
+        if(possibleRemoteControl.isEmpty()){
+            throw new RecordNotFoundException("Remotecontrol not found");
+        }
+        Television television = televisionRepository.getById(televisionId.id);
+        RemoteControl remoteControl = remoteControlRepository.getById(remoteControlId.id);
+        television.setRemoteControl(remoteControl);
+        remoteControl.setTelevision(television);
+    }
 }
