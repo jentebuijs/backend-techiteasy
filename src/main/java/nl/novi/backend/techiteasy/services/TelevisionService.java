@@ -4,6 +4,7 @@ import nl.novi.backend.techiteasy.exceptions.RecordNotFoundException;
 import nl.novi.backend.techiteasy.models.dtos.TelevisionInputDto;
 import nl.novi.backend.techiteasy.models.dtos.TelevisionOutputDto;
 import nl.novi.backend.techiteasy.models.entities.Television;
+import nl.novi.backend.techiteasy.repositories.RemotecontrolRepository;
 import nl.novi.backend.techiteasy.repositories.TelevisionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,13 @@ import static nl.novi.backend.techiteasy.models.dtos.TelevisionOutputDto.fromTel
 @Service
 public class TelevisionService {
     private final TelevisionRepository televisionRepository;
+    private final RemotecontrolRepository remotecontrolRepository;
 
     @Autowired
-    public TelevisionService(TelevisionRepository televisionRepository) {
+    public TelevisionService(TelevisionRepository televisionRepository,
+                             RemotecontrolRepository remotecontrolRepository) {
         this.televisionRepository = televisionRepository;
+        this.remotecontrolRepository = remotecontrolRepository;
     }
 
     public List<TelevisionOutputDto> getTelevisions(){
@@ -63,4 +67,6 @@ public class TelevisionService {
         }
         televisionRepository.deleteById(id);
     }
+
+    public void assignRemoteControlToTelevision()
 }
