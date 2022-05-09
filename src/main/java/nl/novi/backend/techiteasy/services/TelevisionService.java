@@ -27,7 +27,7 @@ public class TelevisionService {
     public TelevisionService(TelevisionRepository televisionRepository,
                              RemoteControlRepository remoteControlRepository) {
         this.televisionRepository = televisionRepository;
-        this.` = remoteControlRepository;
+        this.remoteControlRepository = remoteControlRepository;
     }
 
     public List<TelevisionOutputDto> getTelevisions(){
@@ -70,8 +70,8 @@ public class TelevisionService {
         televisionRepository.deleteById(id);
     }
 
-    public void assignRemoteControlToTelevision(IdInputDto televisionId, IdInputDto remoteControlId){
-        Optional<Television> possibleTelevision = televisionRepository.findById(televisionId.id);
+    public TelevisionOutputDto assignRemoteControlToTelevision(Long televisionId, IdInputDto remoteControlId){
+        Optional<Television> possibleTelevision = televisionRepository.findById(televisionId);
         if(possibleTelevision.isEmpty()){
             throw new RecordNotFoundException("Television not found");
         }
@@ -79,9 +79,10 @@ public class TelevisionService {
         if(possibleRemoteControl.isEmpty()){
             throw new RecordNotFoundException("Remotecontrol not found");
         }
-        Television television = televisionRepository.getById(televisionId.id);
+        Television television = televisionRepository.getById(televisionId);
         RemoteControl remoteControl = remoteControlRepository.getById(remoteControlId.id);
         television.setRemoteControl(remoteControl);
-        remoteControl.setTelevision(television);
+        televisionRepository.save(television);
+        return fromTelevision(television);
     }
 }

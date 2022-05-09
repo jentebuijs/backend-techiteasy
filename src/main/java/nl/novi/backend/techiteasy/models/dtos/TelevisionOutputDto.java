@@ -1,5 +1,6 @@
 package nl.novi.backend.techiteasy.models.dtos;
 
+import nl.novi.backend.techiteasy.models.entities.RemoteControl;
 import nl.novi.backend.techiteasy.models.entities.Television;
 
 public class TelevisionOutputDto {
@@ -19,6 +20,7 @@ public class TelevisionOutputDto {
     public Boolean ambiLight;
     public Integer originalStock;
     public Integer sold;
+    public RemoteControl remoteControl;
 
     public static TelevisionOutputDto fromTelevision(Television television){
         TelevisionOutputDto televisionOutputDto = new TelevisionOutputDto();
@@ -38,6 +40,9 @@ public class TelevisionOutputDto {
         televisionOutputDto.ambiLight = television.getAmbiLight();
         televisionOutputDto.originalStock = television.getOriginalStock();
         televisionOutputDto.sold = television.getSold();
+        if (television.getRemoteControl() != null) {
+            televisionOutputDto.remoteControl = television.getRemoteControl();
+        }
         return televisionOutputDto;
     }
 

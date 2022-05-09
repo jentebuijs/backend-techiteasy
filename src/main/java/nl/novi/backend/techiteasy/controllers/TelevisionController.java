@@ -1,5 +1,6 @@
 package nl.novi.backend.techiteasy.controllers;
 
+import nl.novi.backend.techiteasy.models.dtos.IdInputDto;
 import nl.novi.backend.techiteasy.models.dtos.TelevisionInputDto;
 import nl.novi.backend.techiteasy.models.dtos.TelevisionOutputDto;
 import nl.novi.backend.techiteasy.services.TelevisionService;
@@ -49,6 +50,10 @@ public class TelevisionController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("{id}/remotecontrol")
+    @PutMapping("{televisionId}/remoteControl")
+    public ResponseEntity<TelevisionOutputDto> assignRemotecontrol(@PathVariable Long televisionId, @RequestBody IdInputDto remoteControlId) {
+        TelevisionOutputDto televisionOutputDto= televisionService.assignRemoteControlToTelevision(televisionId, remoteControlId);
+        return ResponseEntity.ok().body(televisionOutputDto);
+    }
 
 }

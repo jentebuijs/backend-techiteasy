@@ -8,7 +8,7 @@ public class RemoteControl {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "remotecontrol")
+    @OneToOne(mappedBy = "remoteControl")
     private Television television;
 
     private String compatibleWith;
